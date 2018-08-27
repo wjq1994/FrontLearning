@@ -1,0 +1,34 @@
+<!--两列布局 左侧固定 右侧自适应 flex布局 兼容性不好-->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				display: flex;
+			}
+			#aside {
+				flex: 0 0 200px;
+				/*flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。所以要将flex-shrink设为0，不能直接选width:200px,长度不够会缩小*/
+				background-color: red;
+			}
+			
+			#content {
+				flex: 1;
+				background-color: blue;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="aside">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore provident dolor in voluptatum tempore non, placeat obcaecati totam ut delectus libero excepturi distinctio asperiores odit nobis soluta, esse aspernatur beatae.
+		</div>
+		<div id="content">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia labore facere delectus quaerat expedita, tenetur recusandae tempora eos natus suscipit voluptatum necessitatibus soluta voluptates modi ullam. Ab minima similique, illum!
+		</div>
+	</body>
+
+</html>

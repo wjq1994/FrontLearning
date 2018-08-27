@@ -1,0 +1,38 @@
+<!--两列布局 左侧固定 右侧自适应 利用margin负值-->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#aside {
+				float: left;
+				margin-right: -200px;
+				width: 200px;
+				background-color: red;
+			}
+			
+			#content {
+				float: right;
+			}
+			
+			#content .inner {
+				margin-left: 200px;
+				background-color: blue;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="aside">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore provident dolor in voluptatum tempore non, placeat obcaecati totam ut delectus libero excepturi distinctio asperiores odit nobis soluta, esse aspernatur beatae.
+		</div>
+		<div id="content">
+			<div class="inner">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia labore facere delectus quaerat expedita, tenetur recusandae tempora eos natus suscipit voluptatum necessitatibus soluta voluptates modi ullam. Ab minima similique, illum!
+			</div>
+		</div>
+	</body>
+
+</html>

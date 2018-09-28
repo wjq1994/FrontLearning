@@ -1,0 +1,90 @@
+<!--参考链接：
+https://juejin.im/entry/59772e9ef265da6c322e24f9#comment
+https://juejin.im/entry/5a6ef0b36fb9a01cbd58dcab
+-->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.one {
+				width: 200px;
+				height: 200px;
+				padding: 20px;
+				background: red;
+				border: 10px solid #000000;
+				overflow: auto;
+			}
+			
+			.two {
+				position: relative;
+				width: 200px;
+				height: 200px;
+				padding: 10px;
+				border: 1px solid green;
+			}
+			
+			.three {
+				width: 100px;
+				height: 100px;
+				background: red;
+				margin: 20px;
+				padding: 20px;
+				border: 1px solid #000000;
+				position: absolute;
+				top: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--clientWidth和clientHeight-->
+		<div class="one">
+			javascript高级应用<br> javascript高级应用
+			<br> javascript高级应用
+			<br> javascript高级应用
+			<br> javascript高级应用
+			<br> javascript高级应用
+			<br> javascript高级应用
+			<br> javascript高级应用
+			<br> javascript高级应用
+			<br> javascript高级应用
+			<br> javascript高级应用
+			<br> javascript高级应用
+			<br> javascript高级应用
+			<br> javascript高级应用
+			<br> javascript高级应用
+			<br> javascript高级应用
+			<br> javascript高级应用
+			<br> javascript高级应用
+			<br>
+		</div>
+		<!--关键词：offsetParent-->
+		<!--offsetLeft和offsetTop指的是当前元素，相对于其offsetParent左边距离和上边距离-->
+		<!--这里让div.two相对定位，让div.three绝对定位，所以div.two是three的offsetParent-->
+		<!--同时，又给div.three加了一个margin为20px,所以这里它的offsetTop为40，-->
+		<!--offsetLeft 本来为0，但是加上margin为20之后就变成了20-->
+		<div class="two">
+			<div class="three">
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			window.onload = function() {
+				var oDiv = document.getElementsByTagName('div')[0];
+				console.log(oDiv.clientWidth + ":" + oDiv.clientHeight); //240:240 padding*2+content
+				console.log(oDiv.offsetWidth + ":" + oDiv.offsetHeight); //260:260 padding*2+border*2+content
+				console.log(oDiv.clientLeft + ":" + oDiv.clientTop); //10:10 border
+				oDiv.onscroll = function() {
+					console.log(this.scrollHeight + ":" + this.scrollWidth);
+					console.log(this.scrollTop);
+				}
+				var oDiv1 = document.querySelector('.three');
+				console.log(oDiv1.offsetTop + ":" + oDiv1.offsetLeft);
+			}
+		</script>
+	</body>
+
+</html>

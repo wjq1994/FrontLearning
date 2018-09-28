@@ -1,3 +1,5 @@
+<!--transfrom翻转90deg后 坐标轴也跟着翻转90deg 即translateX translateY width height计算的坐标轴发生变化-->
+<!--demo实现div2逆向反转90deg后，只是里面内容发生反转-->
 <!DOCTYPE html>
 <html>
 
@@ -13,28 +15,12 @@
 			}
 			
 			#div2 {
-				padding: 50px;
+				width: 200px;
+				height: 50px;
 				position: absolute;
 				border: 1px solid black;
 				background-color: yellow;
-				transform: rotate(45deg);
-				transform-origin: 20% 40%;
-				-ms-transform: rotate(45deg);
-				/* IE 9 */
-				-ms-transform-origin: 20% 40%;
-				/* IE 9 */
-				-webkit-transform:rotate(45deg);
-				/* Safari and Chrome */
-				-webkit-transform-origin: left top ;
-				/* Safari and Chrome */
-				-moz-transform: rotate(45deg);
-				/* Firefox */
-				-moz-transform-origin: 20% 40%;
-				/* Firefox */
-				-o-transform: rotate(45deg);
-				/* Opera */
-				-o-transform-origin: 20% 40%;
-				/* Opera */
+				transform: rotate(-90deg) translate(75px,75px);
 			}
 		</style>
 	</head>
@@ -42,9 +28,14 @@
 	<body>
 
 		<div id="div1">
-			<div id="div2">HELLO</div>
+			<div id="div2">
+				hello
+			</div>
 		</div>
-
+		<script type="text/javascript">
+			document.getElementById("div2").style.width = "50px";
+			document.getElementById("div2").style.height = "200px";
+		</script>
 	</body>
 
 </html>

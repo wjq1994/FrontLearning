@@ -1,0 +1,134 @@
+<!--各种垂直居中-->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.interval {
+				margin: 20px;
+			}
+			
+			#box1 {
+				display: table;
+				background: #42D692;
+				width: 200px;
+				height: 200px;
+			}
+			
+			#cell {
+				display: table-cell;
+				vertical-align: middle;
+				text-align: center;
+			}
+			
+			#box2 {
+				position: relative;
+				background: #42D692;
+				width: 200px;
+				height: 200px;
+			}
+			
+			#content {
+				position: absolute;
+				background: #4986E7;
+				top: 50%;
+				height: 120px;
+				margin-top: -60px;
+				/* negative half of the height */
+			}
+			
+			#box3 {
+				position: relative;
+				background: #42D692;
+				width: 200px;
+				height: 200px;
+			}
+			
+			#content3 {
+				position: absolute;
+				background: #4986E7;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				
+				/* translate -50% 移动自身 */
+			}
+			
+			#box4 {
+				position: relative;
+				background: #42D692;
+				width: 200px;
+				height: 200px;
+			}
+			
+			#content4 {
+				position: absolute;
+				background: #4986E7;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+				height: 120px;
+				width: 70%;
+			}
+			
+			#content5 {
+				background: #42D692;
+				line-height: 120px;
+				height: 120px;
+			}
+			
+			#box6 {
+				display: flex;
+				background: #42D692;
+				width: 200px;
+				height: 200px;
+				justify-content: center;
+				align-items: center;
+			}
+			
+			#content6 {
+				background: #4986E7;
+				height: 120px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--第一种 table-cell-->
+		<!--优点：content 可以动态改变高度(不需在 CSS 中定义)。当 wrapper 里没有足够空间时， content 不会被截断-->
+		<!--缺点：Internet Explorer(甚至 IE8 beta)中无效，许多嵌套标签(其实没那么糟糕，另一个专题)-->
+		<div id="box1" class="interval">
+			<div id="cell">
+				Content goes here Content goes here
+			</div>
+		</div>
+		<!--第二种 top margin-top负值 必须知道高度 高度的1/2-->
+		<!--div块居中-->
+		<div id="box2" class="interval">
+			<div id="content">Content goes here</div>
+		</div>
+		<!--第三种 top left 50% translate(-50%, -50%)-->
+		<div id="box3" class="interval">
+			<div id="content3">Content here</div>
+		</div>
+		<!--第四种 position: absolute;top left right bottom-->
+		<div id="box4" class="interval">
+			<div id="content4"> Content here</div>
+		</div>
+		<!--第五种 line-height height-->
+		<!--适用于所有浏览器-->
+		<!--无足够空间时不会被截断-->
+		<!--只对文本有效(块级元素无效)-->
+		<!--多行时，断词比较糟糕-->
+		<div id="content5"> Content here</div>
+		<!--第六种 flex布局-->
+		<div id="box6" class="interval">
+			<div id="content6"> Content here</div>
+		</div>
+	</body>
+
+</html>

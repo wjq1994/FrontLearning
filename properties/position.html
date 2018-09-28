@@ -1,0 +1,41 @@
+<!--父元素absolute 子元素下一行显示-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+	        .father{
+	            position: absolute;
+				left:32%;
+				top:64%;
+				width: 40%;
+				height: 36px;
+				z-index: 2;
+				text-align: center;
+				padding:0 34px;
+				
+			    background: black;
+	        }
+	        .children{
+	            display: inline-block;
+	            font-size: 36px;
+				line-height: 36px;
+				font-weight: bold;
+				color: #FE5EB5;
+			  	width: 100%;
+			  	/*height: 36px;*/
+			  	background: green;
+			  	border-radius: 14px;
+	        }
+	    </style>
+	</head>
+	<body>
+		<div>
+		    <div class="father" >
+		        <span class="children">testline</span>
+		    </div>
+		</div>
+		<br/><br/>
+	</body>
+</html>

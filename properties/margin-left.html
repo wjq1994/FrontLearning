@@ -1,0 +1,87 @@
+<!--margin-left 负值影响-->
+<!--元素位置：先定位置，在margin；-->
+<!--其后面的元素会补位-->
+<!--负margin会改变浮动元素的显示位置，即使我的元素写在DOM的后面，我也能让它显示在最前面 例子/*双飞翼布局*/-->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.box {
+				border: 1px solid #9966CC;
+				height: 200px;
+			}
+			
+			div :not(.box) {
+				width: 100px;
+				height: 100px;
+			}
+			/*双飞翼布局*/
+			* {
+				margin: 0;
+				padding: 0
+			}
+			
+			.main {
+				float: left;
+				width: 100%;
+			}
+			
+			.main .main-content {
+				margin: 0 210px;
+				background-color: rgba(33, 114, 214, 0.8);
+				height: 500px
+			}
+			
+			.left {
+				width: 200px;
+				float: left;
+				background-color: rgba(255, 82, 0, 0.8);
+				margin-left: -100%;
+				height: 200px
+			}
+			
+			.right {
+				width: 200px;
+				height: 200px;
+				margin-left: -200px;
+				float: left;
+				background-color: rgba(90, 243, 151, 0.8);
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<!--其后面的元素会补位-->
+		<div class="box">
+			<div class="" style="background-color: #000000;margin-top: -50px;">
+
+			</div>
+			<div class="" style="background-color: #0000FF;">
+
+			</div>
+		</div>
+		<!--负margin会改变浮动元素的显示位置，即使我的元素写在DOM的后面，我也能让它显示在最前面-->
+		<div class="box">
+			<div class="" style="background-color: #000000;float: left;">
+
+			</div>
+			<div class="" style="background-color: #0000FF;float: left;">
+
+			</div>
+			<div class="" style="background-color: rgba(90, 243, 151, 0.8);float: left;margin-left: -200px">
+
+			</div>
+		</div>
+
+		<div class="main">
+			<div class="main-content">main content sdfsdasfasfasf   fsdfas fsf</div>
+		</div>
+		<div class="left">left</div>
+		<div class="right">right</div>
+	</body>
+
+</html>

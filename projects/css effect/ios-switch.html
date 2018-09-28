@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>仿ios开关</title>
+    <style>
+        .ios-switch{
+            width: 62px;
+            height: 32px;
+            border: 1px solid #e2e2e2;
+            border-radius: 20px;
+            -webkit-appearance: none;
+            user-select: none;
+            outline: none;
+            background-color: #ffffff;
+            box-shadow: #c2c2c2 0 0 0 0 inset;
+            position: relative;
+            transition:.5s;
+        }
+        .ios-switch:before{
+            content: '';
+            width: 28px;
+            height: 28px;
+            border-radius: 100%;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+            position: absolute;
+            left:0;
+            top:1px;
+            transition:0.3s;
+        }
+        .ios-switch:checked{
+            border-color: #87D66B;
+            box-shadow: #83e482 0 0 0 14px inset;
+            background-color: #87D66B;
+        }
+        .ios-switch:checked:before{
+            left:32px;
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" name="ios-switch" class="ios-switch" id="ios-switch">
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<button id="pre">上一步</button>
+		<button id="next">下一步</button>
+		<script type="text/javascript" src="../../js/jquery.min.js">
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var state = {
+					title: "第二页",
+					url: location.href,
+				}
+				window.history.pushState(state,state.title,state.url);
+				window.addEventListener("popstate", function(event) {  //回调函数中实现需要的功能
+						  alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+				}, false);
+				$("#pre").click(function(){
+					window.history.back();
+				})
+				$("#next").click(function(){
+					window.location.href = "onPopstate1.html";
+				})
+			})
+		</script>
+	</body>
+</html>

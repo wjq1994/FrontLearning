@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+
+<html>
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="keywords" content="mooshine前端,妹纸前端,翻牌效果" />
+		<meta name="description" content="mooshine前端demo,妹纸前端-" />
+		<link rel="shortcut icon" href="/resource/images/logo.ico" type="image/x-icon" />
+		<link rel="bookmark" href="/resource/images/logo.ico" type="image/x-icon" />
+		<title>css3的transform 3D实现翻牌效果-妹纸前端demo</title>
+		<style>
+			.fc_cont {
+				margin: 15px;
+				padding: 15px;
+				background: #f7f7f7;
+				border: 1px solid #bababa;
+			}
+			
+			.fc_cont ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			
+			.fc_cont ul li {
+				display: inline-block;
+			}
+			
+			.fc_cont ul li+li {
+				margin-top: 12px;
+				margin-left: 12px;
+			}
+			
+			.fc_wrapper {
+				width: 150px;
+				height: 235px;
+				box-sizing: border-box;
+				border: 1px solid #e67e22;
+				perspective: 1000px;
+			}
+			
+			.fc_wrapper:hover .fc_inner {
+				transform: rotateY(-180deg);
+			}
+			
+			.fc_wrapper:hover .fc_back {}
+			
+			.fc_inner {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				transform-style: preserve-3d;
+				backface-visibility: hidden;
+				transform-origin: center center;
+				transition: transform 0.8s;
+			}
+			
+			.fc_front {
+				position: absolute;
+				z-index: 4;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				backface-visibility: hidden;
+			}
+			
+			.fc_back {
+				position: absolute;
+				z-index: 2;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				transform-origin: center center;
+				transform: rotateY(180deg);
+				backface-visibility: hidden;
+			}
+			
+			.fc_front img,
+			.fc_back img {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+		<script>
+		</script>
+	</head>
+
+	<body>
+		<div class='art_context2'>
+			<div class="fc_cont">
+				<ul>
+					<li>
+						<div class="fc_wrapper">
+							<div class="fc_inner">
+								<div class="fc_front"><img src="../../img/flop_positiveBand@3x.png" /></div>
+								<div class="fc_back"><img src="../../img/flop_negativeBrand@3x.png" /></div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="myDiv1">
+			
+		</div>
+		<div id="myDiv2">
+			
+		</div>
+		<script type="text/javascript">
+			var times = 2;
+			// code1
+			console.time(1);
+			for(var i = 0; i < times; i++) {
+				document.getElementById('myDiv1').innerHTML += 'a';
+				document.getElementById('myDiv1').style.width = '750px';
+			}
+			console.timeEnd(1);
+
+			// code2
+			console.time(2);
+			var str = '';
+			for(var i = 0; i < times; i++) {
+				str += 'a';
+			}
+			document.getElementById('myDiv2').innerHTML = str;
+			console.timeEnd(2);
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#SomeElementYouWantToAnimate {
+				width: 100px;
+				height: 100px;
+				background: cornflowerblue;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="SomeElementYouWantToAnimate">
+			
+		</div>
+		<script type="text/javascript">
+			var start = null;
+			var callbackNum = 0;
+			var element = document.getElementById('SomeElementYouWantToAnimate');
+			element.style.position = 'absolute';
+
+			function step(timestamp) {
+				callbackNum++;
+				if(!start) start = timestamp;
+				var progress = timestamp - start;
+				element.style.left = Math.min(progress / 10, 200) + 'px';
+				if(progress < 2000) {
+					window.requestAnimationFrame(step);
+				}else {
+					console.log("回调次数最终值："+callbackNum);
+				}
+				console.log("回调次数："+callbackNum)
+			}
+
+			window.requestAnimationFrame(step);
+		</script>
+	</body>
+
+</html>

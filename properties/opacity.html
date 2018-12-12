@@ -1,0 +1,64 @@
+<!--opacity属性
+	父元素透明，子元素怎么设置都透明
+-->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.box1 {
+				width: 500px;
+				height: 500px;
+				background-color: #000;
+				opacity: 0.5;
+				text-align: center
+			}
+			
+			.box1 .child {
+				float: right;
+				width: 100px;
+				height: 100%;
+				z-index: 10;
+				line-height: 500px;
+				background-color: blue;
+				opacity: 1;
+			}
+			
+			.box2 {
+				width: 500px;
+				height: 500px;
+				background-color: #000;
+				background: rgba(0, 0, 0, 0.5);
+				text-align: center
+			}
+			
+			.box2 .child {
+				float: right;
+				width: 100px;
+				height: 100%;
+				z-index: 10;
+				line-height: 500px;
+				background-color: blue;
+				opacity: 1;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!--父元素遮罩层，子元素也透明-->
+		<!--复现：父元素opacity，子元素设置父元素opacity无效，也是透明-->
+		<div class="box1">
+			<div class="child">dfaaf
+			</div>
+		</div>
+		<!--解决：父元素background: rgba(0, 0, 0, 0.5);-->
+		<div class="box2">
+			<div class="child">dfaaf
+			</div>
+		</div>
+	</body>
+
+</html>

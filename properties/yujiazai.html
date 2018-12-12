@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>有序加载</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			body,
+			html {
+				height: 100%;
+			}
+			
+			.content {
+				width: 800px;
+				height: 400px;
+				margin: 0 auto;
+			}
+			
+			img {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.btn-div {
+				margin-top: 30px;
+				text-align: center;
+			}
+			
+			button {
+				padding: 10px 20px;
+				width: 100px;
+				background-color: #cdcdcd;
+				border: none;
+				margin: 0 20px;
+				outline: none;
+			}
+			
+			button:hover {
+				color: white;
+				cursor: pointer;
+				background-color: orange;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="content">
+			<img src="" />
+		</div>
+		<div class="btn-div">
+			<button class="pre">上一页</button>
+			<button class="next">下一页</button>
+		</div>
+		<script type="text/javascript">
+			window.onload = function() {
+				var imgs = [
+					'../img/success/vic_start_1.png',
+					'../img/success/vic_start_2.png',
+					'../img/success/vic_start_3.png',
+					'../img/success/vic_start_4.png',
+					'../img/success/vic_start_5.png',
+					'../img/success/vic_start_6.png',
+					'../img/success/vic_start_7.png'
+				];
+				var imgLength = imgs.length;
+				var count = 0;
+				load();
+
+				function load() {
+					var imgObj = new Image();
+					imgObj.onload = imgObj.onerror = function() {
+						if(count < imgLength) {
+							load();
+						}
+						count++;
+					}
+					imgObj.src = "" + imgs[count];
+				}
+
+				// 获取上一页的DOM
+				var oPre = document.querySelector(".pre");
+				// 获取下一页的DOM
+				var oNext = document.querySelector(".next");
+				// 获取图片的DOM
+				var oImg = document.getElementsByTagName("img")[0];
+				// 定义当前是第几张
+				var currentIndex = 0;
+				// 上一页点击事件
+				oPre.onclick = function() {
+					currentIndex = currentIndex === 0 ? imgLength - 1 : --currentIndex;
+					// 更换图片的src
+					tab(currentIndex);
+				};
+				// 下一页点击事件
+				oNext.onclick = function() {
+					currentIndex = currentIndex === imgLength - 1 ? 0 : ++currentIndex;
+					tab(currentIndex);
+				};
+				// 更换图片的src函数
+				function tab(currentIndex) {
+					console.log(currentIndex);
+					oImg.src = "" + imgs[currentIndex];
+					document.title = "第" + (currentIndex + 1) + "张";
+				}
+			}
+		</script>
+	</body>
+
+</html>

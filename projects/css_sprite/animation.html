@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Document</title>
+		<style>
+			.container {
+				width: 300px;
+				height: 534px;
+				transform: scale(2.5) translateY(-20px);
+				transform-origin: 50% 0%;
+				background-image: url(./success.png);
+				background-position: 0 0;
+				background-repeat: no-repeat;
+				background-size: 300px 17622px;
+				-webkit-animation: move 1.5s forwards 0s steps(26, end), move2 1s infinite 1.5s steps(6, end);
+				animation: move 1.5s forwards 0s steps(26, end), move2 1s infinite 1.5s steps(6, end)
+			}
+			
+			@-webkit-keyframes move {
+				0% {
+					background-position: 0 0
+				}
+				100% {
+					background-position: 0 -13884px
+				}
+			}
+			
+			@keyframes move {
+				0% {
+					background-position: 0 0
+				}
+				100% {
+					background-position: 0 -13884px
+				}
+			}
+			
+			@-webkit-keyframes move2 {
+				0% {
+					background-position: 0 -13884px
+				}
+				100% {
+					background-position: 0 -17088px
+				}
+			}
+			
+			@keyframes move2 {
+				0% {
+					background-position: 0 -13884px
+				}
+				100% {
+					background-position: 0 -17088px
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container"></div>
+	</body>
+
+</html>

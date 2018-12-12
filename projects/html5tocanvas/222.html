@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>合成水印</title>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <style type="text/css">
+        *{margin:0;padding:0;}
+        .content{
+            display:block;
+            margin: 30px;
+        }
+        .content:after{
+            content: "";
+            display:block;
+            clear:both;
+        }
+        .content li{
+            float: left;
+            margin-left:30px;
+            list-style: none;
+        }
+        .img-wrap{
+            display:-webkit-box;
+            -webkit-box-align:center;
+            -webkit-box-pack: center;
+            width:500px;
+            height:400px;
+            
+        }
+        .img-wrap img{
+            max-width: 100%;
+            max-height:100%;
+        }
+        .img-wrap canvas{
+            max-width: 100%;
+            max-height:100%;
+        }
+    </style>
+</head>
+<body>
+    <ul class="content">
+        <li>
+            <p>原图</p>
+            <div class="img-wrap">
+                <img src="2.jpg"/>
+            </div>
+        </li>
+        <li>
+            <p>加水印的canvas</p>
+            <div id="imgContent" class="img-wrap"></div>
+        </li>
+        <li>
+            <p>加水印的img</p>
+            <div id="imgUpload" class="img-wrap"></div>
+        </li>
+    </ul>
+    <script type="text/javascript">
+        var src = $('img').attr('src');
+        var canvas = document.createElement('canvas');
+        var time = new Date();
+        var logoCanvas =time+'  '+'http://www.cnblogs.com/zuoan-oopp'; // 水印
+        var context = canvas.getContext('2d');
+        
+        // 这是上传图像
+        var imgUpload = new Image();
+        imgUpload.src =src;
+        imgUpload.onload = function () {
+            // 绘制
+            var width = imgUpload.width;
+            var height= imgUpload.height;
+            var scale,imgWidth,imgHeight;  // 缩放比 ,按照1024*768缩放
+           
+            if(width>height){  // 横着拍
+                if(width>1024){   //宽大于1024
+                    scale = 1024/width;
+                    imgWidth =1024;
+                    imgHeight = height*scale;  // 算出按照宽1024，的等比压缩后的高
+                    if(imgHeight>768){        // 若高>768,算出等比768缩放的宽
+                        scale = 768/imgHeight;
+                        imgHeight = 768;
+                        imgWidth = imgWidth*scale;
+                    }
+                }else{
+                    imgWidth = width;
+                    imgHeight = height
+                }
+            }else{     // 纵着拍的或者正方形
+                if(height>1024){ // 高大于1024
+                    scale = 1024/height;
+                    imgHeight =1024;
+                    imgWidth = width*scale;  // 算出按照宽1024，的等比压缩后的高
+                    if(imgWidth>768){        // 若高>768,算出等比768缩放的宽
+                        scale = 768/imgWidth;
+                        imgWidth = 768;
+                        imgHeight = imgHeight*scale;
+                    }
+                }else{
+                    imgWidth = width;
+                    imgHeight = height
+                }
+            }
+            canvas.width = imgWidth;    // geicanvas赋值宽度
+            canvas.height = imgHeight+60;  // 给canvas 赋值高度
+            context.save();
+            context.fillStyle = "green";
+            context.fillRect(0,0,imgWidth,imgHeight+60);  // 绘制图片的背景
+            context.restore();
+            context.save();
+            context.font="100px PingFangSC-Regular microsoft yahei";
+            context.fillStyle = "#000";
+            context.restore();
+
+            context.drawImage(imgUpload, 0, 0,imgUpload.width,imgUpload.height,0,0,imgWidth,imgHeight);
+            var lineWidth = 0
+            var initHeight=imgHeight+30;//绘制字体距离canvas顶部初始的高度
+            var lastSubStrIndex= 0; //每次开始截取的字符串的索引     
+            for(var i=0;i<logoCanvas.length;i++){  // 字数换行
+                lineWidth+=context.measureText(logoCanvas[i]).width; 
+                if(lineWidth>canvas.width-20){ 
+                    context.fillText(logoCanvas.substring(lastSubStrIndex,i),10,initHeight);//绘制截取部分
+                    initHeight+=20;//20为字体的高度
+                    height+=20;
+                    lineWidth=0;
+                    lastSubStrIndex=i;
+                } 
+                if(i==logoCanvas.length-1){//绘制剩余部分
+                    context.fillText(logoCanvas.substring(lastSubStrIndex,i+1),10,initHeight);
+                }
+            }
+            var url=canvas.toDataURL("image/jpg", 0.8);   // canvas转换成base64位
+            var newImg = new Image(); 
+            newImg.src = url;
+            newImg.onload = function() {
+                document.getElementById('imgUpload').append(newImg);
+            };
+            document.getElementById('imgContent').append(canvas);  // 将canvas绘制的图片存放在imgContent里
+        };
+        canvas.toBlob(function(blob) {
+            //创建forme
+            var form = new FormData();
+            form.append('file', blob); 
+            $.POST(url, {
+                        data:formData,
+                        processData: false,
+                        contentType: false,
+                        
+                }).done(function(data) {
+                    console.log('回调函数')
+                }).fail((data,textStatus)=>{
+                    console.log('失败函数')
+                })
+        });
+
+        url = url.replace("data:image/png;base64,", "");
+        var blob = b64toBlob(src);
+        var formData = new FormData();
+        formData.append("file",blob);
+        $.POST(url, {
+            data:formData,
+            processData: false,
+            contentType: false,
+        }).done(function(data) {
+            console.log('回调函数')
+        }).fail((data,textStatus)=>{
+            console.log('失败函数')
+        })
+        // 将base64位转换成blob
+        function b64toBlob(b64Data, contentType, sliceSize) {
+            contentType = contentType || '';
+            sliceSize = sliceSize || 512;
+
+            var byteCharacters = atob(b64Data);
+            var byteArrays = [];
+
+            for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+                var byteNumbers = new Array(slice.length);
+                for (var i = 0; i < slice.length; i++) {
+                    byteNumbers[i] = slice.charCodeAt(i);
+                }
+
+                var byteArray = new Uint8Array(byteNumbers);
+
+                byteArrays.push(byteArray);
+            }
+
+            var blob = new Blob(byteArrays, {type: contentType});
+            return blob;
+        }
+    </script>
+</body>
+</html>

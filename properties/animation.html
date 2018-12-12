@@ -1,0 +1,74 @@
+<!--CSS3动画开发指南之逐帧动画-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.animate {
+				width: 88.83333333333333px;
+				height: 54px;
+				margin: 10px auto;
+				overflow: hidden;
+			}
+			
+			.animate img {
+				width: 533px;
+				height: 54px;
+			}
+			/**第一种和写法，动画分为6个阶段，每个阶段之前1步切换**/
+			
+			.animate01 img {
+				-webkit-animation: animate01 1s steps(1) infinite;
+			}
+			
+			@-webkit-keyframes animate01 {
+				0% {
+					transform: translateX(0);
+				}
+				16.7% {
+					transform: translateX(-90px);
+				}
+				33.4% {
+					transform: translateX(-180px);
+				}
+				50.1% {
+					transform: translateX(-270px);
+				}
+				67.8% {
+					transform: translateX(-360px);
+				}
+				84.5% {
+					transform: translateX(-450px);
+				}
+				100% {
+					transform: translateX(-533px);
+				}
+			}
+			/**第二种和写法，动画仅有1个阶段，但需要切换6步来完成，也就是说把每个阶段的计算过程交给css去做**/
+			
+			.animate02 img {
+				-webkit-animation: animate02 1s steps(6, end) infinite;
+			}
+			
+			@-webkit-keyframes animate02 {
+				0% {
+					transform: translateX(0);
+				}
+				100% {
+					transform: translateX(-533px);
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="animate animate01">
+			<img src="http://img.mukewang.com/598c230d0001657c05330054.png" />
+		</div>
+		<div class="animate animate02">
+			<img src="http://img.mukewang.com/598c230d0001657c05330054.png" />
+		</div>
+	</body>
+
+</html>

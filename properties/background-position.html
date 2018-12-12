@@ -1,0 +1,37 @@
+<!--background-position: 
+公式：
+positionX = (容器的宽度-图片的宽度) * percentX;
+positionY = (容器的高度-图片的高度) * percentY;
+解释（X点坐标）：
+负号相当于坐标左移
+正好相当于坐标右移
+positionX =  -图片的宽度 * percentX + 容器的宽度 * percentX;
+第一步：背景图宽度乘以percentX的那个点，左移至容器的左上角顶点 =  -图片的宽度 * percentX
+第二步：开始移动，移动距离 = 容器的宽度 * percentX;
+解释（Y点同理）
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.box1 {
+				width: 600px;
+				height: 1066px;
+				border: #000000 10px solid;
+				background: url(../img/failed/fail_start_113.png) no-repeat;
+				/*容器右下角*/
+				background-position: 100% 100%;
+				/*容器中间*/
+				/*background-position: 50% 50%;*/
+				/*容器左上间*/
+				/*background-position: 0% 0%;*/
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box1">
+		</div>
+	</body>
+</html>

@@ -1,0 +1,160 @@
+<!--插槽分发-->
+<!--向一个组件传递内容-->
+<!---->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/vue.js">
+		</script>
+		<style type="text/css">
+			* {
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			.demo-title {
+				width: 100%;
+				height: 50px;
+				background: #CD74E6;
+				margin: 20px 0px;
+			}
+			
+			.container {
+				border: 1px solid #000000;
+				height: 500px;
+			}
+			
+			header {
+				width: 100%;
+				height: 20%;
+				background: #42D692;
+			}
+			
+			main {
+				width: 100%;
+				height: 60%;
+				background: #4986E7;
+			}
+			
+			footer {
+				width: 100%;
+				height: 20%;
+				background: #666666;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="slot-example-simple">
+			<!--正常组件标签之间是没有内容的-->
+			<!--<navigation-link url="www.baidu.com"></navigation-link>-->
+			<!--定义组件时 加入<slot></slot>-->
+			<!--第一种 普通插入-->
+			<div id="">
+				<div class="demo-title">
+					普通slot
+				</div>
+				<navigation-link url="http://www.baidu.com/">
+					<!-- 添加一个 Font Awesome 图标 -->
+					<span class="fa fa-user"></span> 跳转到百度
+				</navigation-link>
+			</div>
+			<!--第二种 具名插槽  利用template和slot-->
+			<div class="demo-title">
+				具名插槽1
+			</div>
+			<slot-name>
+				<template slot="header">
+					<h1>Here might be a page title</h1>
+				</template>
+
+				<p>A paragraph for the main content.</p>
+				<p>And another one.</p>
+
+				<template slot="footer">
+					<p>Here's some contact info</p>
+				</template>
+			</slot-name>
+			<div class="demo-title">
+				具名插槽2 直接应用到标签上
+			</div>
+			<slot-name>
+				<h1 slot="header">Here might be a page title</h1>
+
+				<p>A paragraph for the main content.</p>
+				<p>And another one.</p>
+
+				<p slot="footer">Here's some contact info</p>
+			</slot-name>
+			<div class="demo-title">
+				插槽默认内容 如果父组件为这个插槽提供了内容，则默认的内容会被替换掉。
+			</div>
+			<slot-default>
+				提交
+			</slot-default>
+			<div class="demo-title">
+				作用域插槽
+			</div>
+			<slot-scope v-bind:todos="todos">
+				<!-- 将 `slotProps` 定义为插槽作用域的名字 -->
+				<template slot-scope="slotProps">
+					<!-- 为待办项自定义一个模板，-->
+					<!-- 通过 `slotProps` 定制每个待办项。-->
+					<span v-if="slotProps.todo.isComplete">✓</span> {{ slotProps.todo.text }}
+				</template>
+			</slot-scope>
+		</div>
+
+		<script type="text/javascript">
+			Vue.component('navigation-link', {
+				data: function() {
+					return {
+						//welcome : "welcome"
+					}
+				},
+				props: ['url'],
+				template: '<a v-bind:href="url" class="nav-link"><slot></slot></a>'
+			})
+			Vue.component('slot-name', {
+				data: function() {
+					return {}
+				},
+				template: '<div class="container">' +
+					'<header>' +
+					'<slot name="header"></slot>' +
+					'</header>' +
+					'<main>' +
+					'<slot></slot>' +
+					'</main>' +
+					'<footer>' +
+					'<slot name="footer"></slot>' +
+					'</footer>' +
+					'</div>'
+			})
+			Vue.component('slot-default', {
+				data: function() {
+					return {
+						//welcome : "welcome"
+					}
+				},
+				template: '<button type="submit"><slot>Submit</slot></button>'
+			})
+			Vue.component('slot-scope', {
+				data: function() {
+					return {
+						//welcome : "welcome"
+					}
+				},
+				template: '<button type="submit"><slot>Submit</slot></button>'
+			})
+			new Vue({
+				el: '#slot-example-simple',
+			})
+		</script>
+
+	</body>
+
+</html>

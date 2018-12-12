@@ -1,0 +1,42 @@
+<!--$emit -->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/vue.js">
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="emit-example-simple">
+			<welcome-button v-on:welcome="sayHi"></welcome-button>
+		</div>
+		<script type="text/javascript">
+			Vue.component('welcome-button', {
+				data : function() {
+					return {
+						//welcome : "welcome"
+					}
+				},
+				//$emit 中的welcome 不能解析为字符串
+//				template: '<button v-on:click="$emit('+"welcome"+')">Click me to be welcomed</button>',
+//				template: '<button v-on:click="$emit('welcome')">Click me to be welcomed</button>'
+				template: '<button v-on:click="$emit(\'welcome\')">Click me to be welcomed</button>'
+			})
+
+			new Vue({
+				el: '#emit-example-simple',
+				methods: {
+					sayHi: function() {
+						alert('Hi!')
+					}
+				}
+			})
+		</script>
+
+	</body>
+
+</html>

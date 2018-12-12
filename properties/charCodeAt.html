@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			var data = {
+				"command": "REG",
+				"customerId": "792220",
+				"roomId": 285
+			};
+			var strJson = JSON.stringify(data);
+			var str111 = "{\"command\":\"REG\",\"customerId\":\"792220\",\"roomId\":285}";
+			var val = "";
+			var str = '{"command":"REG","customerId":"792220","roomId":285}';
+			if(strJson === str) {
+				alert("相等");
+			} else {
+				alert("不相等");
+			}
+			for(var i = 0; i < str.length; i++) {
+				if(val == "")
+					val = str.charCodeAt(i).toString(16);
+				else
+					//val += "," + str.charCodeAt(i).toString(16);
+					val += str.charCodeAt(i).toString(16);
+			}
+			console.log(val);
+		</script>
+	</body>
+
+</html>

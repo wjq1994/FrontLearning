@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--<script src="../vue.js"></script>-->
+		<!--<script src="../bower_components/vue-router/dist/vue-router.min.js"></script>-->
+
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				color: #333;
+			}
+			
+			body {
+				margin: 0 50px;
+			}
+			
+			a {
+				text-decoration: none;
+				cursor: pointer;
+				color: #fff
+			}
+			
+			.router-link-active {
+				color: #0c13e6;
+			}
+			
+			.nav {
+				background-color: #e45ea273;
+				width: 100%;
+				height: 60px;
+				line-height: 60px;
+				font-size: 20px;
+			}
+			
+			ul {
+				list-style: none;
+				margin: 0 30px;
+			}
+			
+			li {
+				float: left;
+				margin: 0 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="box">
+			<div class="nav">
+				<ul>
+					<li>
+						<router-link to="/home">主页</router-link>
+					</li>
+					<li>
+						<router-link to="/news">新闻</router-link>
+					</li>
+					<li>
+						<router-link to="/myiframe/urlPath?src=https://www.baidu.com/s?wd=abc">Myiframe_URL</router-link>
+					</li>
+					<li>
+						<router-link to="/myiframe/home">Myiframe_主页</router-link>
+					</li>
+					<li>
+						<router-link to="/myiframe/news">Myiframe_新闻</router-link>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<!--渲染匹配的组件-->
+				<router-view></router-view>
+			</div>
+		</div>
+
+		<template id="home">
+			<div>
+				<h3>我是主页</h3>
+			</div>
+		</template>
+		<template id="news">
+			<div>
+				<div>
+					<h3>我是新闻</h3>
+					<router-link to="/news/details/10010?t=1">用户详细</router-link>
+					<router-link to="/news/name/lucy/age/20">用户名称</router-link>
+					<router-link to="/news/ret">首页</router-link>
+				</div>
+				<div>
+					<router-view></router-view>
+				</div>
+			</div>
+		</template>
+		<template id="details">
+			<div>
+				<h3>我是用户详细</h3>
+				<h3>当前完整路径fullPath:{{$route.fullPath}}</h3>
+				<h3>当前路径path:{{$route.path}}</h3>
+				<h3>当前参数params:{{$route.params}}</h3>
+				<h3>当前查询参数query:{{$route.query}}</h3>
+				<h3>hash:{{$route.hash}}</h3>
+				<h3>router:{{$route.router}}</h3>
+				<!--<h3>matched:{{$route.matched}}</h3>-->
+			</div>
+		</template>
+		<template id="myiframe">
+			<div>
+				<h3>urlPath : {{urlPath}}</h3>
+				<h3>routerPath : {{routerPath}}</h3>
+				<h3>src : {{$route.query.src}}</h3>
+				<iframe v-if="$route.query.src" :src='$route.query.src' frameborder="0" width="900px" height="500px"></iframe>
+				<iframe v-else :src="urlPath" frameborder="0" width="900px" height="500px"></iframe>
+				<!--<iframe :src="'//elemefe.github.io/mint-ui/#'" frameborder="0" width="300px" height="300px"></iframe>-->
+			</div>
+		</template>
+		<script>
+			var Home = {
+				template: "#home"
+			}
+			var News = {
+				template: "#news"
+			}
+			var Details = {
+				template: "#details"
+			}
+			var Myiframe = {
+				template: "#myiframe",
+				data: function() {
+					return {
+						msg: "",
+						urlPath: this.getUrlPath() //iframe src 路径
+					}
+				},
+				props: ['routerPath'] // 路由地址
+					,
+				watch: {
+					routerPath: function(val) { // 监听routerPath变化，改变src路径
+						this.urlPath = this.getUrlPath();
+					}
+				},
+				methods: {
+					getUrlPath: function() { //获取 iframe src 路径
+						let url = window.location.href;
+						url = url.replace("myiframe/", "");
+						return url;
+					}
+				}
+			}
+
+			const routes = [{
+					path: "/home",
+					component: Home
+				},
+				{
+					path: "/news",
+					component: News,
+					children: [
+						//实际使用中可以懒加载方式={path:"index",component: resolve => require(['./index.vue'], resolve) },
+						{
+							path: "details/:id",
+							component: Details
+						},
+						{
+							path: "name/:name/age/:age",
+							component: {
+								template: "<h3>{{$route.params}}</h3>"
+							}
+						},
+						{
+							path: "ret",
+							redirect: '/home'
+						}
+
+					]
+				},
+				{
+					path: "/myiframe/:routerPath",
+					component: Myiframe,
+					props: true
+				}, //props:true 必须
+				{
+					path: "*",
+					redirect: "/home"
+				} //{path:"*",component:Home}
+			];
+
+			const router = new VueRouter({
+				routes
+			});
+
+			var app = new Vue({
+				router,
+				el: '#box',
+				data: {
+
+				}
+			});
+		</script>
+	</body>
+
+</html>

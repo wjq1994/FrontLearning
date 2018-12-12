@@ -1,0 +1,52 @@
+<!--组件 -->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/vue.js">
+		</script>
+	</head>
+
+	<body>
+		<div id="blog-posts-events-demo">
+			<!--通过 Prop 向子组件传递数据 -->
+			<div :style="{ fontSize: postFontSize + 'em' }">
+				<blog-post v-for="post in posts" v-bind:key="post.id" v-bind:post="post"></blog-post>
+			</div>
+			<!--通过 Prop 向子组件传递数据 -->
+			<div :style="{ fontSize: postFontSize + 'em' }">
+				<blog-post v-for="post in posts" v-bind:key="post.id" v-bind:post="post"></blog-post>
+			</div>
+		</div>
+		<script type="text/javascript">
+			Vue.component('blog-post', {
+				props: ['key','post'],
+				template: '<div class="blog-post"><h3>{{ post.title }}</h3><button v-on:click="$emit("welcome")"> Enlarge text</button><div v-html="post.content"></div></div>'
+			})
+			new Vue({
+				el: '#blog-posts-events-demo',
+				data: {
+					posts: [{
+						id: "11",
+						title: "title1",
+						content: "bowen1"
+					},{
+						id: "22",
+						title: "title2",
+						content: "bowen2"
+					},{
+						id: "33",
+						title: "title3",
+						content: "bowen3"
+					}],
+					postFontSize: 2
+				}
+			})
+			
+		</script>
+
+	</body>
+
+</html>

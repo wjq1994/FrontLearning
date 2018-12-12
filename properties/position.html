@@ -1,41 +1,49 @@
-<!--父元素absolute 子元素下一行显示-->
+<!--父元素 子元素absolute-->
+<!--1/父元素overflow-x: scroll; 子元素left: -100px;不会滑动-->
+<!--2/父元素overflow-x: scroll; 子元素right: -100px;会滑动-->
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 		<style>
-	        .father{
-	            position: absolute;
-				left:32%;
-				top:64%;
-				width: 40%;
-				height: 36px;
-				z-index: 2;
-				text-align: center;
-				padding:0 34px;
-				
-			    background: black;
-	        }
-	        .children{
-	            display: inline-block;
-	            font-size: 36px;
-				line-height: 36px;
-				font-weight: bold;
-				color: #FE5EB5;
-			  	width: 100%;
-			  	/*height: 36px;*/
-			  	background: green;
-			  	border-radius: 14px;
-	        }
-	    </style>
+			.father {
+				position: relative;
+				width: 500px;
+				height: 100px;
+				background: #000000;
+				overflow-x: scroll;
+			}
+			
+			.children {
+				width: 100%;
+				height: 50px;
+				background: green;
+			}
+			
+			.rightMinus {
+				position: absolute;
+				top: 0px;
+				/*left: -100px;*/
+				right: -100px;
+				width: 100px;
+				height: 50px;
+				background: red;
+			}
+		</style>
 	</head>
+
 	<body>
 		<div>
-		    <div class="father" >
-		        <span class="children">testline</span>
-		    </div>
+			<div class="father">
+				<div class="children">testline</div>
+				<div class="rightMinus">
+
+				</div>
+			</div>
 		</div>
 		<br/><br/>
 	</body>
+
 </html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.fail-start-120,
+			.fail-start-121,
+			.fail-start-122,
+			.fail-start-123,
+			.fail-start-124,
+			.fail-start-125,
+			.fail-start-126,
+			.fail-start-127,
+			.fail-start-128,
+			.fail-start-129,
+			.fail-start-130,
+			.fail-start-131,
+			.fail-start-132,
+			.fail-start-133,
+			.fail-start-134,
+			.fail-start-135,
+			.fail-start-136 {
+				max-width: 100%;
+				background-size: 100%;
+				background-image: url('css_sprites.png');
+			}
+			
+			.fail-start-120 {
+				background-position: 0 0%;
+				background-size: 100%;
+			}
+			
+			.fail-start-121 {
+				background-position: 0 6.25%;
+				background-size: 100%;
+			}
+			
+			.fail-start-122 {
+				background-position: 0 12.5%;
+				background-size: 100%;
+			}
+			
+			.fail-start-123 {
+				background-position: 0 18.75%;
+				background-size: 100%;
+			}
+			
+			.fail-start-124 {
+				background-position: 0 25%;
+				background-size: 100%;
+			}
+			
+			.fail-start-125 {
+				background-position: 0 31.25%;
+				background-size: 100%;
+			}
+			
+			.fail-start-126 {
+				background-position: 0 37.5%;
+				background-size: 100%;
+			}
+			
+			.fail-start-127 {
+				background-position: 0 43.75%;
+				background-size: 100%;
+			}
+			
+			.fail-start-128 {
+				background-position: 0 50%;
+				background-size: 100%;
+			}
+			
+			.fail-start-129 {
+				background-position: 0 56.25%;
+				background-size: 100%;
+			}
+			
+			.fail-start-130 {
+				background-position: 0 62.5%;
+				background-size: 100%;
+			}
+			
+			.fail-start-131 {
+				background-position: 0 68.75%;
+				background-size: 100%;
+			}
+			
+			.fail-start-132 {
+				background-position: 0 75%;
+				background-size: 100%;
+			}
+			
+			.fail-start-133 {
+				background-position: 0 81.25%;
+				background-size: 100%;
+			}
+			
+			.fail-start-134 {
+				background-position: 0 87.5%;
+				background-size: 100%;
+			}
+			
+			.fail-start-135 {
+				background-position: 0 93.75%;
+				background-size: 100%;
+			}
+			
+			.fail-start-136 {
+				width: 200px;
+				height: 200px;
+				background-position: 0 100%;
+				background-size: 100%;
+			}
+			
+			@keyframes run {
+				0% {
+					background-position: 0 0%;
+					background-size: 100%;
+				}
+				8.333% {
+					background-position: 0 6.25%;
+					background-size: 100%;
+				}
+				16.666% {
+					background-position: 0 12.5%;
+					background-size: 100%;
+				}
+				25.0% {
+					background-position: 0 18.75%;
+					background-size: 100%;
+				}
+				33.333% {
+					background-position: 0 25%;
+					background-size: 100%;
+				}
+				41.666% {
+					background-position: 0 31.25%;
+					background-size: 100%;
+				}
+				50.0% {
+					background-position: 0 37.5%;
+					background-size: 100%;
+				}
+				58.333% {
+					background-position: 0 43.75%;
+					background-size: 100%;
+				}
+				66.666% {
+					background-position: 0 50%;
+					background-size: 100%;
+				}
+				75.0% {
+					background-position: 0 56.25%;
+					background-size: 100%;
+				}
+				83.333% {
+					background-position: 0 62.5%;
+					background-size: 100%;
+				}
+				91.666% {
+					background-position: 0 68.75%;
+					background-size: 100%;
+				}
+				100% {
+					background-position: 0 75%;
+					background-size: 100%;
+				}
+			}
+			
+			.box {
+				width: 300px;
+				height: 533px;
+				background: url('css_sprites.png');
+				animation: run 2s steps(1, start) infinite;
+				-webkit-animation: run 2s steps(1, start) infinite;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="box" class="box">
+
+		</div>
+		<script type="text/javascript" src="requestAnimationFrame.js">
+		</script>
+		<script type="text/javascript">
+			var element = document.getElementById("box");
+			var position = 0;
+			var callbackNum = 0;
+			function step(timestamp) {
+				callbackNum++;
+				position = position + 6.25;
+				element.style.backgroundPosition = "0 "+position + '%';
+				if(position < 100) {
+					window.requestAnimationFrame(step);
+				} else {
+					position = 0;
+					window.requestAnimationFrame(step);
+//					console.log("回调次数最终值：" + callbackNum);
+				}
+				console.log("回调次数：" + callbackNum)
+			}
+
+			window.requestAnimationFrame(step);
+		</script>
+	</body>
+
+</html>

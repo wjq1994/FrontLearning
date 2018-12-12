@@ -1,0 +1,271 @@
+<!--1.雪碧图图片要一样大-->
+<!--2.http://responsive-css.spritegen.com 生成雪碧图-->
+<!--3.可以通过设置background-size: 100% 2100%(图片个数*100%) 响应式适配-->
+<!--也可以通过原始尺寸width:300px,height:534px做，之后利用transform:scale()缩放 -->
+<!--4.利用background-position改变背景图位置，达到动态特效-->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.vic-loop-101,
+			.vic-loop-102,
+			.vic-loop-103,
+			.vic-loop-104,
+			.vic-loop-105,
+			.vic-loop-106,
+			.vic-loop-107,
+			.vic-loop-108,
+			.vic-loop-109,
+			.vic-loop-110,
+			.vic-loop-111,
+			.vic-loop-112,
+			.vic-loop-113,
+			.vic-loop-114,
+			.vic-loop-115,
+			.vic-loop-116,
+			.vic-loop-117,
+			.vic-loop-118,
+			.vic-loop-119,
+			.vic-loop-120,
+			.vic-loop-121 {
+				max-width: 100%;
+				background-size: 100%;
+				background-image: url('success_loop.png');
+			}
+			
+			.vic-loop-101 {
+				background-position: 0 0%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-102 {
+				background-position: 0 5%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-103 {
+				background-position: 0 10%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-104 {
+				background-position: 0 15%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-105 {
+				background-position: 0 20%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-106 {
+				background-position: 0 25%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-107 {
+				background-position: 0 30%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-108 {
+				background-position: 0 35%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-109 {
+				background-position: 0 40%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-110 {
+				background-position: 0 45%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-111 {
+				background-position: 0 50%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-112 {
+				background-position: 0 55%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-113 {
+				background-position: 0 60%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-114 {
+				background-position: 0 65%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-115 {
+				background-position: 0 70%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-116 {
+				background-position: 0 75%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-117 {
+				background-position: 0 80%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-118 {
+				background-position: 0 85%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-119 {
+				background-position: 0 90%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-120 {
+				background-position: 0 95%;
+				background-size: 100%;
+			}
+			
+			.vic-loop-121 {
+				background-position: 0 100%;
+				background-size: 100%;
+			}
+			
+			.box {
+				width: 300px;
+				height: 534px;
+				border: 1px solid #000000;
+				margin: 20px;
+				display: inline-block;
+				animation: run 2s steps(1, start) infinite;
+				-webkit-animation: run 2s steps(1, start) infinite;
+				background-image: url('success_loop.png');
+				transform: scale(1.5);
+			}
+			
+			@keyframes run {
+				0% {
+					background: url('success_loop.png');
+					background-position: 0 0%;
+					background-size: 100%;
+				}
+				5% {
+					background: url('success_loop.png');
+					background-position: 0 5%;
+					background-size: 100%;
+				}
+				10% {
+					background: url('success_loop.png');
+					background-position: 0 10%;
+					background-size: 100%;
+				}
+				15% {
+					background: url('success_loop.png');
+					background-position: 0 15%;
+					background-size: 100%;
+				}
+				20% {
+					background: url('success_loop.png');
+					background-position: 0 20%;
+					background-size: 100%;
+				}
+				25% {
+					background: url('success_loop.png');
+					background-position: 0 25%;
+					background-size: 100%;
+				}
+				30% {
+					background: url('success_loop.png');
+					background-position: 0 30%;
+					background-size: 100%;
+				}
+				35% {
+					background: url('success_loop.png');
+					background-position: 0 35%;
+					background-size: 100%;
+				}
+				40% {
+					background: url('success_loop.png');
+					background-position: 0 40%;
+					background-size: 100%;
+				}
+				45% {
+					background: url('success_loop.png');
+					background-position: 0 45%;
+					background-size: 100%;
+				}
+				50% {
+					background: url('success_loop.png');
+					background-position: 0 50%;
+					background-size: 100%;
+				}
+				55% {
+					background: url('success_loop.png');
+					background-position: 0 55%;
+					background-size: 100%;
+				}
+				60% {
+					background: url('success_loop.png');
+					background-position: 0 60%;
+					background-size: 100%;
+				}
+				65% {
+					background: url('success_loop.png');
+					background-position: 0 65%;
+					background-size: 100%;
+				}
+				70% {
+					background: url('success_loop.png');
+					background-position: 0 70%;
+					background-size: 100%;
+				}
+				75% {
+					background: url('success_loop.png');
+					background-position: 0 75%;
+					background-size: 100%;
+				}
+				80% {
+					background: url('success_loop.png');
+					background-position: 0 80%;
+					background-size: 100%;
+				}
+				85% {
+					background-position: 0 85%;
+					background-size: 100%;
+				}
+				90% {
+					background: url('success_loop.png');
+					background-position: 0 90%;
+					background-size: 100%;
+				}
+				95% {
+					background: url('success_loop.png');
+					background-position: 0 95%;
+					background-size: 100%;
+				}
+				100% {
+					background: url('success_loop.png');
+					background-position: 0 100%;
+					background-size: 100%;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box  ">
+
+		</div>
+	</body>
+
+</html>

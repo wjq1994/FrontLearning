@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<button id="btn">开始运动</button>
+		<button id="reset">还原</button>
+		<div id="test" style="height: 100px;width: 100px;background-color: pink;position:absolute;left:0;"></div>
+		<div style="background-color:green;width:1px;height:100px;position:absolute;left:0px;"></div>
+		<div style="background-color:blue;width:1px;height:100px;position:absolute;left:200px;"></div>
+		<div style="background-color:red;width:1px;height:100px;position:absolute;left:400px;"></div>
+		<script>
+			function getCSS(obj, style) {
+				if(window.getComputedStyle) {
+					return getComputedStyle(obj)[style];
+				}
+				return obj.currentStyle[style];
+			}
+			reset.onclick = function() {
+				history.go();
+			}
+			btn.onclick = function() {
+				//声明定时器运行次数
+				var index = -1;
+				//声明步长值step
+				var step;
+				//声明当前值cur
+				var cur;
+				//声明目标值
+				var target = parseFloat('400px');
+				//声明运动的次数，一个方向的加速和减速运动总共算一个运动
+				var num = 0;
+				clearInterval(test.timer);
+				test.timer = setInterval(function() {
+					//更新定时器的工作次数
+					index++;
+					//当index为200时，说明进行完一次运动，则将index置0
+					if(index == 200) {
+						index = 0;
+						num += 0.5;
+					};
+					//更新当前值
+					cur = parseFloat(getCSS(test, 'left'));
+					//更新步长值
+					if(Math.floor(num) % 2 == 0) {
+						//加速运动
+						if(cur < 200) {
+							step = (2 * index + 1) / 200;
+						} else {
+							//减速运动
+							step = 2 - (2 * index + 1) / 200;
+						}
+					} else {
+						//加速运动
+						if(cur > 200) {
+							step = -(2 * index + 1) / 200;
+						} else {
+							//减速运动
+							step = (2 * index + 1) / 200 - 2;
+						}
+					}
+					//更新left值
+					test.style.left = cur + step + 'px';
+				}, 20);
+			}
+		</script>
+	</body>
+
+</html>

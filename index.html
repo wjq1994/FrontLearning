@@ -1,34 +1,58 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="zh-CN">
 
 	<head>
-		<meta charset="utf-8" />
-		<title></title>
-		<style>
-			* {
-				margin: 0;
-				padding: 0;
-				border: none;
-			}
-			.header {
-				width: 100px;
-				height: 200px;
-				background-color: black;
-				border: 1px solid blue;
-				padding: 20px;
-			}
-			.container {
-				width: 50px;
-				height: 100px;
-				background-color: white;
-			}
-		</style>
+		<meta charset="UTF-8">
+		<title>JavaScript Study</title>
 	</head>
 
 	<body>
-		<div class="header">
-			<div class="container"></div>
-		</div>
+		<a class='payssion-button' data-key='live_fd62616db2e9dbfd'>&nbsp;Pay Via Payssion</a>
+		<script src='https://www.payssion.com/static/checkout/button.js' type='text/javascript'></script>
+		<script type="text/javascript">
+			var startY = 0; // 一个对象的初始位置 老虎机中心 
+			var bound = 100; //下边界
+			var image = [9]; //9个对象
+			var interval = 20; //画一次的间隔
+			var count = 0; //计数
+			var startIndex = 0; //最前面的对象索引   开始是第一张图
+			var endIndex = 8; //最后的对象索引 开始是最后一张图
+			// 心跳处理  心跳就相当于一个一秒触发60次的定时器
+			proc: function(dt) {
+				//小于间隔不画
+				if(++count < interval) {
+					return;
+				}
+
+				//可以画
+				//重置
+				count = 0;
+				for(let index = 0; index < 9; index++) {
+					const element = image[index];
+					element.y += 1;
+				}
+
+				//全部对象移动完后
+				//判断最前面的是否超出边界
+				if(image[startIndex].y > bound) { //超了
+					const endY = image[endIndex].y; //获取最后一个对象的位置
+					image[startIndex].y = endY - 10; //假设一个对象10像素  计算的到最后一个对象后面的y坐标  把最前面的对象移过去
+					//最前面的移动到最后   最前面的索引就变了
+					startIndex += 1; //最前面对象的索引就变成下一个  记得判断边界  9的下一个是1   从1变2在变3
+					startIndex > 9 ? 1 : startIndex;
+					endIndex += 1; //最后对象索引变第一个  也要判断边界   从9  到 1 再到 2
+					endIndex > 9 ? 1 : endIndex;
+
+					/**
+					 * 选择一个时机改变速度   自己根据感觉调整   比如一圈改变一次速度   
+					 * 那么 startIndex = 9 第9个对象变成最前面的就是一圈
+					 */
+					if(startIndex == 9) {
+						interval -= 2; //interval减少多少自己控制   interval等于20 相当于心跳触发20次   所有对象移动1像素     等于18  就是触发18次就移动1像素  就变快了
+					}
+				}
+			}
+		</script>
 	</body>
 
 </html>

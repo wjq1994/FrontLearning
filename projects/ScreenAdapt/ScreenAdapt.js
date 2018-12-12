@@ -118,4 +118,4 @@ window.mobileUtil = (function(win, doc) {
 })(window, document);
 
 // 默认直接适配页面
-export default mobileUtil;
+//export default mobileUtil;
